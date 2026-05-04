@@ -1,0 +1,12 @@
+description: >-
+  TESTCASE to verify that a GET request to /comments returns a list of comments
+  with status 200.
+id: 84758533-d7e8-4a21-9b0f-3794b316fd03
+name: Get All Comments
+type: TESTCASE
+testSuiteId: 4215c326-7d25-4fb5-a49a-842741b62ea5
+dependencies: []
+parentId: 4215c326-7d25-4fb5-a49a-842741b62ea5
+testSteps:
+  - fileReference: get-all-comments-request--ownQedmQ.request.yaml
+    type: request

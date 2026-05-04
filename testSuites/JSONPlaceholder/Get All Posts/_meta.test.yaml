@@ -1,0 +1,12 @@
+description: >-
+  TESTCASE to verify that a GET request to /posts returns a list of posts with
+  status 200.
+id: fd86568a-0742-45be-9028-6edf71dc1e45
+name: Get All Posts
+type: TESTCASE
+testSuiteId: 4215c326-7d25-4fb5-a49a-842741b62ea5
+dependencies: []
+parentId: 4215c326-7d25-4fb5-a49a-842741b62ea5
+testSteps:
+  - fileReference: get-all-posts-request--8uBN6yCQ.request.yaml
+    type: request

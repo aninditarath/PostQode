@@ -1,0 +1,32 @@
+id: 1784d8d3-f345-4cd5-98e8-517da9d9f644
+name: Get All Photos Request
+request:
+  url:
+    raw: '{{baseUrl}}/photos'
+    host:
+      - '{{baseUrl}}'
+    path:
+      - photos
+  method: get
+  headers:
+    - key: Accept
+      value: application/json
+  body:
+    mode: none
+events:
+  - listen: test
+    script:
+      type: javascript
+      exec:
+        - pq.test('Status code is 200', function () {
+        - '    pq.response.to.have.status(200);'
+        - '});'
+        - pq.test('Response is an array', function () {
+        - '    pq.expect(pq.response.json()).to.be.an(''array'');'
+        - '});'
+        - pq.test('Array has 5000 photos', function () {
+        - '    pq.expect(pq.response.json()).to.have.lengthOf(5000);'
+        - '});'
+      src: ''
+      packages: []
+type: request

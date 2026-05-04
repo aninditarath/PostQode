@@ -1,0 +1,10 @@
+description: BEFORE hook to define the base URL for JSONPlaceholder API requests.
+id: 8ade5e00-b4bb-48a6-b289-93a38d93f01a
+name: Setup Base URL
+type: BEFORE
+testSuiteId: 4215c326-7d25-4fb5-a49a-842741b62ea5
+dependencies: []
+parentId: 4215c326-7d25-4fb5-a49a-842741b62ea5
+testSteps:
+  - fileReference: set-base-url-variable--AR5gPXJO.request.yaml
+    type: request

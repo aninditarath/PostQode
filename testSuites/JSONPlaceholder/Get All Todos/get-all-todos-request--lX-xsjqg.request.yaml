@@ -1,0 +1,32 @@
+id: fbe95916-a83d-4f52-b893-be0f34b793e3
+name: Get All Todos Request
+request:
+  url:
+    raw: '{{baseUrl}}/todos'
+    host:
+      - '{{baseUrl}}'
+    path:
+      - todos
+  method: get
+  headers:
+    - key: Accept
+      value: application/json
+  body:
+    mode: none
+events:
+  - listen: test
+    script:
+      type: javascript
+      exec:
+        - pq.test('Status code is 200', function () {
+        - '    pq.response.to.have.status(200);'
+        - '});'
+        - pq.test('Response is an array', function () {
+        - '    pq.expect(pq.response.json()).to.be.an(''array'');'
+        - '});'
+        - pq.test('Array has 200 todos', function () {
+        - '    pq.expect(pq.response.json()).to.have.lengthOf(200);'
+        - '});'
+      src: ''
+      packages: []
+type: request

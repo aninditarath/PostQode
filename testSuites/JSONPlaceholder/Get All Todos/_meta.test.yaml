@@ -1,0 +1,12 @@
+description: >-
+  TESTCASE to verify that a GET request to /todos returns a list of todos with
+  status 200.
+id: 83499fed-b907-46b0-b3e4-d9a0f3b463a7
+name: Get All Todos
+type: TESTCASE
+testSuiteId: 4215c326-7d25-4fb5-a49a-842741b62ea5
+dependencies: []
+parentId: 4215c326-7d25-4fb5-a49a-842741b62ea5
+testSteps:
+  - fileReference: get-all-todos-request--lX-xsjqg.request.yaml
+    type: request

@@ -1,0 +1,32 @@
+id: e7686943-c2bc-44bf-9c52-9e50b8b3f0cd
+name: Get All Users Request
+request:
+  url:
+    raw: '{{baseUrl}}/users'
+    host:
+      - '{{baseUrl}}'
+    path:
+      - users
+  method: get
+  headers:
+    - key: Accept
+      value: application/json
+  body:
+    mode: none
+events:
+  - listen: test
+    script:
+      type: javascript
+      exec:
+        - pq.test('Status code is 200', function () {
+        - '    pq.response.to.have.status(200);'
+        - '});'
+        - pq.test('Response is an array', function () {
+        - '    pq.expect(pq.response.json()).to.be.an(''array'');'
+        - '});'
+        - pq.test('Array has 10 users', function () {
+        - '    pq.expect(pq.response.json()).to.have.lengthOf(10);'
+        - '});'
+      src: ''
+      packages: []
+type: request

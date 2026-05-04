@@ -1,0 +1,42 @@
+id: 3f9cfc7f-b031-447b-823e-bb36914bcad3
+name: Get Single Post Request
+request:
+  url:
+    raw: '{{baseUrl}}/posts/1'
+    host:
+      - '{{baseUrl}}'
+    path:
+      - posts
+      - '1'
+  method: get
+  headers:
+    - key: Accept
+      value: application/json
+  body:
+    mode: none
+events:
+  - listen: test
+    script:
+      type: javascript
+      exec:
+        - pq.test('Status code is 200', function () {
+        - '    pq.response.to.have.status(200);'
+        - '});'
+        - pq.test('Response is an object', function () {
+        - '    pq.expect(pq.response.json()).to.be.an(''object'');'
+        - '});'
+        - pq.test('Response has userId', function () {
+        - '    pq.expect(pq.response.json()).to.have.property(''userId'');'
+        - '});'
+        - pq.test('Response has id', function () {
+        - '    pq.expect(pq.response.json()).to.have.property(''id'').that.equals(1);'
+        - '});'
+        - pq.test('Response has title', function () {
+        - '    pq.expect(pq.response.json()).to.have.property(''title'');'
+        - '});'
+        - pq.test('Response has body', function () {
+        - '    pq.expect(pq.response.json()).to.have.property(''body'');'
+        - '});'
+      src: ''
+      packages: []
+type: request

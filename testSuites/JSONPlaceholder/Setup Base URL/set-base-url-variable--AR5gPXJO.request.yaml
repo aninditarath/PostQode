@@ -1,0 +1,31 @@
+id: 68f0184f-76d5-41f5-a698-10236c7d10a3
+name: Set Base URL Variable
+request:
+  url:
+    raw: https://jsonplaceholder.typicode.com/posts/1
+    protocol: https
+    host:
+      - jsonplaceholder
+      - typicode
+      - com
+    path:
+      - posts
+      - '1'
+  method: get
+  headers:
+    - key: Accept
+      value: application/json
+  body:
+    mode: none
+events:
+  - listen: test
+    script:
+      type: javascript
+      exec:
+        - pq.test('Set base URL in collection variable', function () {
+        - '    pq.collectionVariables.set(''baseUrl'', ''https://jsonplaceholder.typicode.com'');'
+        - '    console.log(''Base URL set to: https://jsonplaceholder.typicode.com'');'
+        - '});'
+      src: ''
+      packages: []
+type: request

@@ -1,0 +1,12 @@
+description: >-
+  TESTCASE to verify that a GET request to /posts/1 returns a single post with
+  status 200 and correct structure.
+id: 4d29a7ad-b533-4170-ad83-464603ee6ea9
+name: Get Single Post
+type: TESTCASE
+testSuiteId: 4215c326-7d25-4fb5-a49a-842741b62ea5
+dependencies: []
+parentId: 4215c326-7d25-4fb5-a49a-842741b62ea5
+testSteps:
+  - fileReference: get-single-post-request--AlCsXjqN.request.yaml
+    type: request

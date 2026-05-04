@@ -1,0 +1,355 @@
+Issue Type,Summary,Description,Story Points,Priority,Component,Epic Link,Acceptance Criteria,Labels
+Epic,EPIC-001: User Authentication & Account Management,Implement secure user authentication and account management,16,P1,Auth,,All authentication features including registration, login, MFA, session management,authentication
+Story,US-001: User Registration with Email Validation,New users can create accounts with email and password validation,3,P1,Auth,EPIC-001,"- Registration form accepts valid email
+- Email uniqueness validation
+- Password complexity validation (8+ chars, uppercase, lowercase, numbers, special)
+- Confirmation email sent with activation link
+- Account activation required before login",registration,validation
+Story,US-002: User Login with Valid Credentials,Registered users can login with correct email and password,2,P1,Auth,EPIC-001,"- Login form accepts email and password
+- Credentials validated against database
+- JWT token generated on successful login
+- Session created with 30-min timeout
+- User redirected to dashboard",login,authentication
+Story,US-003: User Login Failure Handling,User receives clear feedback for incorrect login attempts,2,P1,Auth,EPIC-001,"- Invalid credentials rejected
+- Error message displayed
+- Failed login attempts tracked (max 5)
+- Account locked after 5 failed attempts for 15 minutes",login,error-handling
+Story,US-004: Session Management,User sessions are created and destroyed correctly,2,P1,Auth,EPIC-001,"- Session created after successful login
+- Session timeout after 30 minutes
+- Session destroyed after logout
+- User cannot access app without valid session
+- Multiple sessions handled correctly",session,security
+Story,US-005: Password Reset,User can reset forgotten password,2,P2,Auth,EPIC-001,"- Forgot Password link on login page
+- Reset link sent to registered email
+- Reset link valid for 24 hours only
+- Password reset form validates complexity rules
+- Confirmation email sent after reset",password-reset,recovery
+Story,US-006: Multi-Factor Authentication Setup,User can enable MFA for enhanced security,3,P2,Auth,EPIC-001,"- MFA option available in account settings
+- Support TOTP (Google Authenticator, Microsoft Authenticator)
+- QR code provided for setup
+- Backup codes generated (8-10 codes)
+- MFA required on login if enabled",mfa,security
+Story,US-007: User Profile Management,User can update profile information,2,P2,Auth,EPIC-001,"- Edit name, email, phone number
+- Profile picture upload (max 5MB)
+- Change password with current password verification
+- View account activity log
+- Manage notification preferences",profile,user-settings
+Story,US-008: API Authentication,API requests require valid authentication,2,P1,Auth,EPIC-001,"- All API endpoints require valid JWT token
+- Invalid tokens rejected with 401 status
+- Token expiration enforced
+- Token refresh mechanism working
+- API responses match UI expectations",api,authentication
+Epic,EPIC-002: Product Catalog & Inventory Management,Product discovery with advanced search filtering and inventory management,22,P1,Catalog,,Product listing, search, filtering, sorting, and admin inventory features,catalog,products
+Story,US-009: View Product List,Customer can view all available products in a paginated list,2,P1,Catalog,EPIC-002,"- Product listing shows image, name, price, rating
+- Pagination support (10, 25, 50 items per page)
+- Default sort by popularity
+- Products load within 2 seconds
+- No duplicate products shown",product-listing,ui
+Story,US-010: Search Products by Name,Customer can search for products by name or keyword,2,P1,Catalog,EPIC-002,"- Search box visible on every page
+- Search returns results within 1 second
+- Fuzzy matching for typos
+- Search history saved for logged-in users
+- No results page shows suggestions",search,discovery
+Story,US-011: Filter Products,Customer can filter products by category price rating and availability,2,P1,Catalog,EPIC-002,"- Category filter (multi-select)
+- Price range slider ($0 - $10,000)
+- Rating filter (1-5 stars)
+- Availability filter (In Stock, Out of Stock)
+- Apply Filters and Clear All buttons",filter,search
+Story,US-012: Sort Products,Customer can sort products by price and name,1,P1,Catalog,EPIC-002,"- Sort options: Name (A-Z, Z-A), Price (Low-High, High-Low), Popularity
+- Selected sort option highlighted
+- Sorting applies to current view
+- Sort preference persists during session",sort,ui
+Story,US-013: View Product Details,Customer can view detailed product information,2,P1,Catalog,EPIC-002,"- Product name, price, SKU displayed
+- Product images with zoom functionality
+- Product specifications and details
+- Customer reviews and ratings
+- Stock status indicator
+- Add to Cart button visible",product-details,ui
+Story,US-014: Product Reviews & Ratings,Verified purchaser can write product reviews,2,P2,Catalog,EPIC-002,"- Review form accessible from order history
+- 1-5 star rating available
+- Title and comment fields (required)
+- Image upload option (max 3 images)
+- Verified Purchase badge displayed
+- Review moderation before display",reviews,user-content
+Story,US-015: Product Search Autocomplete,Search shows autocomplete suggestions while typing,2,P2,Catalog,EPIC-002,"- Suggestions appear after 2 characters
+- Response time < 100ms
+- Top 5-10 suggestions displayed
+- Product images shown in suggestions
+- Click suggestion to navigate to product",autocomplete,search
+Story,US-016: Admin Create Product Listing,Admin can create new product listings,3,P1,Admin,EPIC-002,"- Product creation form with all fields
+- SKU, name, description, price, category required
+- Product images upload (max 10 images)
+- Initial stock level input
+- Publish immediately or save as draft",admin,product-management
+Story,US-017: Admin Update Product Listing,Admin can edit product information,2,P1,Admin,EPIC-002,"- Edit form pre-populated with current data
+- Edit any field (except SKU for existing products)
+- Image management (add, remove, reorder)
+- Price change with history tracking
+- Publish/unpublish toggle",admin,product-management
+Story,US-018: Admin Manage Inventory Levels,Admin can adjust inventory stock quantities,2,P1,Admin,EPIC-002,"- Edit inventory form per product
+- Quantity adjustment or set exact amount
+- Reason for adjustment (dropdown)
+- Change logged in audit trail
+- Timestamp and user recorded",admin,inventory
+Story,US-019: Admin Bulk Inventory Import,Admin can import inventory data via CSV file,2,P2,Admin,EPIC-002,"- CSV upload interface available
+- CSV format template provided
+- File validation before import
+- Preview of data before confirmation
+- Error reporting for invalid rows",admin,inventory,bulk-operations
+Story,US-020: Admin Set Low Stock Alerts,Admin can set low stock thresholds for products,1,P2,Admin,EPIC-002,"- Set reorder level per product
+- Email notification when stock <= threshold
+- In-app notification in dashboard
+- Daily summary of low-stock items
+- Alert suppression once restocked",admin,inventory,alerts
+Epic,EPIC-003: Shopping Cart & Checkout,Shopping cart functionality and secure checkout process,24,P1,Cart,,Cart management and multi-step secure checkout,cart,checkout,ecommerce
+Story,US-021: Add Product to Cart,Customer can add product to shopping cart,2,P1,Cart,EPIC-003,"- Add to Cart button visible on product page
+- Quantity selector available (1-999)
+- Out-of-stock items disabled
+- Confirmation toast displayed
+- Cart badge updates immediately",cart,shopping
+Story,US-022: View Shopping Cart,Customer can view shopping cart contents,2,P1,Cart,EPIC-003,"- Cart displays all items with images, names, prices
+- Item quantity and subtotal per line item
+- Cart subtotal, taxes, shipping calculated
+- Total price prominently displayed
+- Continue Shopping and Proceed to Checkout buttons",cart,shopping,ui
+Story,US-023: Update Cart Quantities,Customer can update item quantities in cart,2,P1,Cart,EPIC-003,"- Quantity increment/decrement buttons (+ / -)
+- Direct quantity input field
+- Min quantity: 1, Max: available stock
+- Line subtotal updates in real-time
+- Out-of-stock validation prevents overselling",cart,shopping,validation
+Story,US-024: Remove Items from Cart,Customer can remove items from cart,1,P1,Cart,EPIC-003,"- Remove button on each cart item
+- Confirmation dialog before removal
+- Item removed immediately
+- Cart total updates
+- Undo option available for 10 seconds",cart,shopping
+Story,US-025: Apply Discount Codes,Customer can apply discount codes to orders,2,P2,Cart,EPIC-003,"- Coupon code input field in cart
+- Apply Code button
+- Code format validation (alphanumeric, case-insensitive)
+- Real-time discount calculation
+- Error messages for invalid/expired codes",cart,promotions,discounts
+Story,US-026: Cart Persistence,Shopping cart persists across sessions,2,P1,Cart,EPIC-003,"- Cart persists during session
+- Cart persists during logout (registered users)
+- Cart syncs with backend
+- Cart consistent across pages
+- Cart survives browser refresh",cart,persistence,data-consistency
+Story,US-027: Cart Checkout,Cart clears after successful checkout,1,P1,Cart,EPIC-003,"- Cart clears after checkout completion
+- Confirmation message displayed
+- Order confirmation sent
+- Cart badge resets to 0",cart,checkout
+Story,US-028: Select Shipping Method,Customer can select shipping method,2,P1,Checkout,EPIC-003,"- Shipping options: Standard, Express, Overnight
+- Shipping cost displayed per method
+- Estimated delivery date shown
+- Free shipping indicator if applicable
+- Default to Standard shipping",checkout,shipping
+Story,US-029: Guest Checkout,Guest users can complete purchase without account,2,P2,Checkout,EPIC-003,"- Continue as Guest option on checkout
+- Email entered for order confirmation
+- All required fields for shipping/payment
+- No account creation required
+- Order confirmation email sent",checkout,guest,user-experience
+Story,US-030: Secure Payment Processing,Customer can pay for order securely,3,P1,Checkout,EPIC-003,"- Multiple payment methods available
+- SSL/TLS encryption for payment data
+- Payment gateway integration (Stripe)
+- Card tokenization for saved cards
+- Fraud detection check
+- Clear error messages for failed payments",checkout,payment,security
+Story,US-031: Order Review Before Confirmation,Customer can review complete order before confirming,2,P1,Checkout,EPIC-003,"- Order summary page before confirmation
+- All items listed with quantities and prices
+- Shipping address displayed
+- Shipping method and cost shown
+- Discount amount applied
+- Final total prominently displayed",checkout,review,user-experience
+Story,US-032: Order Confirmation & Receipt,Customer receives order confirmation with receipt,2,P1,Checkout,EPIC-003,"- Confirmation page shown after order creation
+- Order ID generated and displayed
+- Order summary with all items
+- Confirmation email sent immediately
+- Invoice PDF attached to email",checkout,confirmation,notifications
+Story,US-033: Checkout Validation,Checkout validates all required fields,2,P1,Checkout,EPIC-003,"- Required fields enforced
+- Validation messages shown clearly
+- Invalid input rejected
+- User info persists across checkout steps
+- Inputs sanitized properly",checkout,validation,security
+Story,US-034: Prevent Duplicate Orders,System prevents duplicate order submission,2,P1,Checkout,EPIC-003,"- Order created only once
+- Duplicate submission prevented
+- Submit button disabled after click
+- Loading indicator shown
+- Idempotent API calls",checkout,data-integrity
+Epic,EPIC-004: Order Management & Tracking,Order viewing tracking and management for customers,14,P1,Orders,,Customer order history, tracking, cancellation, and returns,orders,customer-service
+Story,US-035: View Order History,Customer can view order history,2,P1,Orders,EPIC-004,"- Order list shows order ID, date, status, total
+- Default sort by date (newest first)
+- Pagination for large order history
+- Order status badge displayed
+- Quick filters by date and status",orders,ui,customer-service
+Story,US-036: View Order Details,Customer can view detailed order information,2,P1,Orders,EPIC-004,"- All order items with quantities and prices
+- Order date and current status
+- Shipping address and method
+- Delivery tracking information
+- Payment method used (masked)
+- Download invoice as PDF",orders,ui,customer-service
+Story,US-037: Track Order Shipment,Customer can track shipment in real-time,2,P2,Orders,EPIC-004,"- Tracking information on order detail
+- Carrier name and tracking number shown
+- Link to carrier's tracking page
+- Estimated delivery date
+- Status updates (in transit, out for delivery, delivered)",orders,tracking,notifications
+Story,US-038: Cancel Order,Customer can cancel order if not shipped,2,P2,Orders,EPIC-004,"- Cancel button available for Processing orders
+- Cancel button disabled once order ships
+- Cancellation confirmation dialog
+- Order status updated to Cancelled
+- Refund initiated automatically",orders,cancellation
+Story,US-039: Request Return or Refund,Customer can request return or refund,2,P2,Orders,EPIC-004,"- Return button available on delivered orders (within 30 days)
+- Select items to return
+- Reason for return (dropdown)
+- Return shipping label generated
+- Refund amount calculated",orders,returns,refunds
+Story,US-040: Order Notifications,Customer receives order status notifications,2,P2,Orders,EPIC-004,"- Email notification on order confirmation
+- Email notification when order ships with tracking
+- Email on delivery attempt
+- In-app notifications for all status changes
+- Notification preferences manageable",orders,notifications,communication
+Epic,EPIC-005: Admin Dashboard - Orders & Analytics,Administrative order management and business analytics,18,P1,Admin,,Admin order management, shipping, refunds, and business reporting,admin,analytics,business-intelligence
+Story,US-041: Admin View All Orders,Admin can view all customer orders,2,P1,Admin,EPIC-005,"- Orders dashboard shows all orders
+- Order ID, date, customer name, total, status displayed
+- Status color coding
+- Sort by date, total, status
+- Filter by date range, status, customer",admin,orders,reporting
+Story,US-042: Admin View Order Details,Admin can view complete order details,2,P1,Admin,EPIC-005,"- All order items with quantities, prices, SKUs
+- Customer information (name, email, phone, address)
+- Order date and time
+- Payment method and transaction ID
+- Shipping address and method",admin,orders,customer-service
+Story,US-043: Admin Update Order Status,Admin can update order status,2,P1,Admin,EPIC-005,"- Status dropdown: Processing to Shipped to Delivered
+- Status change confirmation dialog
+- Timestamp recorded automatically
+- Customer notification sent on status change
+- Status change logged in order history",admin,orders,fulfillment
+Story,US-044: Admin Generate Shipping Labels,Admin can generate shipping labels,2,P1,Admin,EPIC-005,"- Generate label button on order detail
+- Integration with shipping carrier (FedEx, UPS)
+- Shipping address pre-populated
+- Label PDF generated and downloadable
+- Tracking number auto-populated in order",admin,orders,fulfillment,shipping
+Story,US-045: Admin Process Refunds,Admin can process refunds,2,P1,Admin,EPIC-005,"- Refund button on order detail
+- Refund type selection (full/partial)
+- Reason for refund (dropdown)
+- Refund amount calculated or manual override
+- Status updated to Refunded",admin,orders,refunds,payment
+Story,US-046: Admin Sales Dashboard,Admin can view sales metrics and KPIs,3,P2,Admin,EPIC-005,"- Key metrics: revenue, order count, AOV
+- Date range options: Today, This Week, This Month, Custom
+- Revenue trend chart
+- Orders trend chart
+- Top products by revenue",admin,analytics,reporting,dashboards
+Story,US-047: Admin Traffic & Conversion Analytics,Admin can analyze traffic and conversions,2,P2,Admin,EPIC-005,"- Daily/monthly unique visitor count
+- Traffic source breakdown
+- Page views and bounce rate
+- Conversion funnel visualization
+- Product view to purchase conversion %",admin,analytics,reporting
+Story,US-048: Admin Customer Analytics,Admin can analyze customer metrics,2,P2,Admin,EPIC-005,"- New customer count by period
+- Customer lifetime value distribution
+- Repeat purchase rate
+- Customer retention cohort analysis
+- RFM analysis (Recency, Frequency, Monetary)",admin,analytics,reporting,customer-service
+Story,US-049: Admin Product Performance Report,Admin can view product performance,2,P2,Admin,EPIC-005,"- Revenue per product
+- Units sold per product
+- Profit margin per product
+- Return rate per product
+- High performers vs. slow movers",admin,analytics,reporting,inventory
+Story,US-050: Admin Inventory Report,Admin can generate inventory reports,2,P2,Admin,EPIC-005,"- Total inventory value
+- Stock level by category
+- Stock turnover by product
+- Low-moving products
+- Reorder recommendations",admin,inventory,reporting
+Epic,EPIC-006: Navigation & User Experience,Navigation state management and user experience,10,P1,UI,,Page navigation, protected routes, workflow sequence, and UI responsiveness,navigation,ux
+Story,US-051: Page Navigation,User can navigate between pages,2,P1,UI,EPIC-006,"- Navigation menu works consistently
+- User can navigate between pages
+- Navigation maintains state
+- Back button maintains correct state
+- Refresh maintains correct state",navigation,ui
+Story,US-052: Authentication Required for Protected Pages,User cannot access protected pages without login,1,P1,UI,EPIC-006,"- User cannot skip steps via URL
+- Deep links require authentication
+- Logout redirects correctly
+- Unauthorized access returns 401",navigation,security,authentication
+Story,US-053: Workflow Navigation,Checkout workflow follows correct sequence,2,P1,UI,EPIC-006,"- Workflow follows correct sequence
+- Navigation does not allow step skipping
+- Navigation does not duplicate actions
+- URL reflects correct state
+- Errors handled gracefully",navigation,workflow
+Story,US-054: UI Responsiveness & Performance,UI loads quickly and responds to user actions,2,P1,UI,EPIC-006,"- Pages load within 2 seconds
+- UI responsive across devices
+- No UI overlap or break
+- Buttons respond correctly
+- Loading indicators visible",ui,performance
+Story,US-055: Mobile Responsive Design,Application is mobile responsive,2,P1,UI,EPIC-006,"- All features work on mobile (320px width)
+- Touch-friendly buttons and inputs
+- Mobile-optimized images
+- Fast loading on 4G networks
+- Mobile payment integration",ui,mobile,responsive-design
+Epic,EPIC-007: Data Consistency & System Reliability,Data consistency API reliability and system observability,12,P1,Backend,,API data consistency, error handling, and system monitoring,data-consistency,reliability
+Story,US-056: API Response Data Consistency,API returns correct and consistent data,2,P1,Backend,EPIC-007,"- API returns correct product data
+- API returns correct cart data
+- API returns correct order data
+- API returns correct status codes
+- API responses match UI expectations",api,data-consistency
+Story,US-057: API Error Handling,API handles errors gracefully,2,P1,Backend,EPIC-007,"- API returns appropriate error codes
+- Error messages are descriptive
+- API handles timeouts gracefully
+- Retry mechanism for failed requests
+- Error logging for debugging",api,error-handling
+Story,US-058: Authentication API Validation,API enforces authentication correctly,2,P1,Backend,EPIC-007,"- API authentication enforced correctly
+- Invalid tokens rejected with 401
+- Token expiration enforced
+- Token refresh mechanism working
+- API and UI validation consistent",api,authentication,security
+Story,US-059: Test Data Management,Test environment has clean test data,2,P1,QA,EPIC-007,"- Test data resets between sessions
+- Pre-populated test products available
+- Test user accounts provided
+- Sample orders in various statuses
+- Data reset functionality",qa,test-data
+Story,US-060: System Observability & Logging,System logs important events,2,P1,Backend,EPIC-007,"- Logs generated for failures
+- Logs contain sufficient detail
+- System behavior consistent across users
+- Errors traceable via logs
+- System observable end-to-end",backend,logging,monitoring
+Story,US-061: Performance & Stability Under Load,System performs well under load,2,P1,Backend,EPIC-007,"- No memory leaks on repeated actions
+- Performance stable under stress
+- Concurrent user support (10,000+)
+- Cache hit rate > 80%
+- Page load time < 2 seconds",backend,performance,load-testing
+Epic,EPIC-008: Quality Assurance & Testing Tools,QA infrastructure testing tools and test coverage measurement,16,P1,QA,,QA tools, test accounts, documentation, execution, and reporting,qa,testing,quality-assurance
+Story,US-062: Test Account Management,QA team has dedicated test accounts,2,P1,QA,EPIC-008,"- Admin test account provided
+- Manager test account provided
+- Customer test account(s) provided
+- Test credentials documented securely
+- Test accounts resettable to initial state",qa,test-accounts
+Story,US-063: Test Case Documentation,QA team has documented test cases,2,P1,QA,EPIC-008,"- Test case template standardized
+- Test case repository available
+- Tag test cases by feature/module
+- Version control for test cases
+- Link test cases to requirements",qa,documentation,test-cases
+Story,US-064: Test Execution & Reporting,QA team can execute tests and generate reports,2,P1,QA,EPIC-008,"- Test execution form (pass/fail/skip/blocked)
+- Screenshot/video capture support
+- Bug linking from test results
+- Test summary report generation
+- Export reports as PDF/Excel",qa,reporting,test-execution
+Story,US-065: Bug Tracking & Reporting,QA team can report bugs,2,P1,QA,EPIC-008,"- Bug report form with required fields
+- Severity/priority selection
+- Steps to reproduce
+- Screenshot/video attachment
+- Submit to issue tracking (Jira integration)",qa,bug-tracking
+Story,US-066: Test Environment Management,QA team has stable test environments,2,P1,QA,EPIC-008,"- Multiple test environments (Dev, Staging, Performance)
+- Environment status dashboard
+- Deploy to test environment capability
+- Data reset per environment
+- Environment monitoring and alerting",qa,infrastructure
+Story,US-067: API Testing Tools,QA team has API testing tools,2,P2,QA,EPIC-008,"- RESTful API documentation (OpenAPI/Swagger)
+- Postman/Insomnia collections available
+- API sandbox environment
+- Test data endpoints for setup/teardown
+- Rate limit testing capabilities",qa,api-testing,automation
+Story,US-068: Performance Testing Tools,QA team can execute performance tests,2,P2,QA,EPIC-008,"- Load testing API endpoints
+- UI performance monitoring
+- Page load time tracking
+- Concurrent user simulation
+- Performance report generation",qa,performance-testing
+Story,US-069: Mobile Testing Support,QA team can test on mobile devices,2,P2,QA,EPIC-008,"- Device testing matrix documented
+- BrowserStack/cloud device access
+- Mobile emulators available
+- Network condition simulation
+- Mobile-specific bug reporting",qa,mobile-testing

@@ -1,0 +1,32 @@
+id: 68407971-93aa-4158-8ab3-76740ad7ac2e
+name: Get All Posts Request
+request:
+  url:
+    raw: '{{baseUrl}}/posts'
+    host:
+      - '{{baseUrl}}'
+    path:
+      - posts
+  method: get
+  headers:
+    - key: Accept
+      value: application/json
+  body:
+    mode: none
+events:
+  - listen: test
+    script:
+      type: javascript
+      exec:
+        - pq.test('Status code is 200', function () {
+        - '    pq.response.to.have.status(200);'
+        - '});'
+        - pq.test('Response is an array', function () {
+        - '    pq.expect(pq.response.json()).to.be.an(''array'');'
+        - '});'
+        - pq.test('Array has 100 posts', function () {
+        - '    pq.expect(pq.response.json()).to.have.lengthOf(100);'
+        - '});'
+      src: ''
+      packages: []
+type: request

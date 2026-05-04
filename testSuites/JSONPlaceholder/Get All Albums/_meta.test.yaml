@@ -1,0 +1,12 @@
+description: >-
+  TESTCASE to verify that a GET request to /albums returns a list of albums with
+  status 200.
+id: 4da33302-d5b2-4615-aab8-83b1cbc118b6
+name: Get All Albums
+type: TESTCASE
+testSuiteId: 4215c326-7d25-4fb5-a49a-842741b62ea5
+dependencies: []
+parentId: 4215c326-7d25-4fb5-a49a-842741b62ea5
+testSteps:
+  - fileReference: get-all-albums-request--tR4tdVtM.request.yaml
+    type: request

@@ -1,0 +1,17 @@
+description: >-
+  Test suite for JSONPlaceholder REST API
+  (https://jsonplaceholder.typicode.com/) covering Posts, Comments, Albums,
+  Photos, Todos, and Users endpoints with comprehensive test scenarios including
+  positive tests, negative tests, and boundary value testing.
+id: 4215c326-7d25-4fb5-a49a-842741b62ea5
+name: JSONPlaceholder
+disabled: false
+before: []
+beforeEach: []
+testGroup: []
+testCases: []
+afterEach: []
+after: []
+runConfigs: []
+auth:
+  type: none
